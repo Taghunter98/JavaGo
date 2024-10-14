@@ -1,5 +1,7 @@
 package JavaGo;
 
+import java.util.Scanner;
+
 public class Terminal {
     /*
     This class is only to make the terminal look pretty :)
@@ -26,5 +28,6 @@ public class Terminal {
         }
         System.out.println();
     }
+
 
 }

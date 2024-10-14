@@ -16,6 +16,7 @@ public class Item {
      */
     public String itemName;
     public String itemDes;
+    public double itemPrice;
     public String itemID;
     public int itemCal;
     boolean hasAllergy;
@@ -25,7 +26,7 @@ public class Item {
     static String randID;
 
     // constructor for Items
-    public Item(String itemName, String itemDes, int itemCal, boolean hasAllergy) {
+    public Item(String itemName, String itemDes, double itemPrice, int itemCal, boolean hasAllergy) {
 
         // Generate random ID, for example 283952-V8M32
         char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
@@ -37,6 +38,7 @@ public class Item {
         }
 
         this.itemName = itemName;
+        this.itemPrice = itemPrice;
         this.itemDes = itemDes;
         this.itemID = randID;
         this.itemCal = itemCal;
@@ -65,6 +67,11 @@ public class Item {
     // get item description
     public String getItemDes() {
         return itemDes;
+    }
+
+    // get item price
+    public double getPrice() {
+        return itemPrice;
     }
 
     // get item ID
@@ -101,6 +108,17 @@ public class Item {
             }
         } else {
             System.out.println("Item not found");
+        }
+    }
+
+    // Method to print each item out
+    public static void printItems() {
+        Iterator<Item> it = items.iterator();
+        while (it.hasNext()) {
+            Item item = it.next();
+            System.out.println("Item Name: " + item.getItemName() + "\nDescription: " + item.getPrice());
+            System.out.println("Calories: " + item.getItemCal());
+            Terminal.printDivider(50);
         }
     }
 

@@ -16,8 +16,8 @@ public class Coffee extends Item{
     static ArrayList<Coffee> coffees = new ArrayList<>();
 
     // constructor for Coffee class
-    public Coffee(String itemName, String itemDes, int itemCal, boolean hasAllergy, String milkType, String beanType) {
-        super(itemName, itemDes, itemCal, hasAllergy);
+    public Coffee(String itemName, String itemDes, double itemPrice, int itemCal, boolean hasAllergy, String milkType, String beanType) {
+        super(itemName, itemDes, itemPrice,itemCal, hasAllergy);
 
         this.milkType = milkType;
         this.beanType = beanType;
@@ -30,7 +30,7 @@ public class Coffee extends Item{
     /*
     Accessor methods for Coffee class
     - get milkType
-    - getbeanType
+    - getBeanType
      */
 
     // get milk type

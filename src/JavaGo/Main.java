@@ -14,20 +14,20 @@ public class Main {
 
     // build project
     public static void main(String[] args) {
-        User.createUser(scanner);
 
         // Creating item instances
-        Item coffee = new Item("Coffee", "Hot brewed coffee", 5, false);
-        Item muffin = new Item("Muffin", "Blueberry muffin", 350, true);
+        Item coffee = new Item("Coffee", "Hot brewed coffee", 4.95 ,5, false);
+        Item muffin = new Item("Muffin", "Blueberry muffin", 4.95,350, true);
 
         // coffee type arrays
-        String[] milkTypes = {"Cows Milk", "Oat Milk", "Soya Milk"};
+        String[] milkTypes = {"Cows Milk", "Oat Milk", "Soy Milk"};
         String[] beanTypes = {"Arabica", "Robusta", "Liberica", "Excelsa"};
 
         // coffees
         Coffee cappuccino = new Coffee(
                 "Cappuccino",
                 "Cappuccino with regular milk",
+                4.95,
                 180,
                 true,
                 milkTypes[0],beanTypes[0]
@@ -35,18 +35,13 @@ public class Main {
         Coffee latte = new Coffee(
                 "Latte",
                 "Latte with regular milk",
+                5.30,
                 170,
                 true,
                 milkTypes[0],beanTypes[1]
         );
 
-
-        // Get user input to print the item details
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the name of the item to display details: ");
-        String input = scanner.nextLine();
-
-        // Print item details based on user input
-        Coffee.printCoffee(input);
+        // Ordering process
+        User.createUser(scanner);
     }
 }

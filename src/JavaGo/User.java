@@ -65,7 +65,7 @@ public class User {
         Random rnd = new Random();
         userId = 100000000 + rnd.nextInt(900000000);
 
-        Terminal.printDivider(50);
+        Terminal.clearTerminal();
         Terminal.printHeader("Welcome to Javago");
         System.out.println("Please enter your name: ");
         String userName = scanner.next();
@@ -88,6 +88,9 @@ public class User {
         System.out.println(newUser.getId());
 
         // function that moves user to next step
+        Order.order(userId,userName);
     }
+
+
 }
 
