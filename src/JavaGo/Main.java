@@ -43,7 +43,7 @@ public class Main {
 
         // Get user input to print the item details
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the name of the item to display its details: ");
+        System.out.println("Enter the name of the item to display details: ");
         String input = scanner.nextLine();
 
         // Print item details based on user input
