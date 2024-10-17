@@ -88,7 +88,7 @@ public class User {
         System.out.println(newUser.getId());
 
         // function that moves user to next step
-        Order.order(userId,userName);
+        Order.order();
     }
 
 
