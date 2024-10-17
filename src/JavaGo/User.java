@@ -13,11 +13,10 @@ public class User {
      */
     public String name;
     public int id;
-    boolean hasAllergy = false;
+    boolean hasAllergy;
 
     // user creation fields
-    Scanner scanner = new Scanner(System.in);
-    static ArrayList<User> users = new ArrayList<User>();
+    static ArrayList<User> users = new ArrayList<>();
 
     // constructor for User
     public User(String name,int id,boolean hasAllergy) {
@@ -72,14 +71,7 @@ public class User {
         Terminal.printDivider(50);
         System.out.println("Do you have an allergy? \n(1) Yes \n(2) No:");
         String allergy = scanner.next();
-        boolean userAllergy = false;
-
-        if (allergy.equals("1")) {
-            userAllergy = true;
-        }
-        else if (allergy.equals("2")) {
-            userAllergy = false;
-        }
+        boolean userAllergy = allergy.equals("1");
 
         // create new user and add to the array list TODO add to db
         User newUser = new User(userName,userId,userAllergy);
