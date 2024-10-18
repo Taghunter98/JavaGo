@@ -46,7 +46,18 @@ public class Item {
         items.add(this);
     }
 
-    public Item(String itemName, String itemDes, int itemCal, boolean hasAllergy, String milkType, String beanType) {
+    public static void createItems() {
+        // Pastries and snacks
+        Item croissant = new Item("Croissant", "Fresh buttery croissant", 2.95, 200, false);
+        Item sandwich = new Item("Ham Sandwich", "Ham and cheese sandwich", 5.50, 350, true);
+        Item cookie = new Item("Chocolate Chip Cookie", "Large cookie with chocolate chips", 3.50, 250, true);
+        Item fruitSalad = new Item("Fruit Salad", "Mixed fruit salad", 4.20, 150, false);
+
+        // Add to items list
+        items.add(croissant);
+        items.add(sandwich);
+        items.add(cookie);
+        items.add(fruitSalad);
     }
 
     /*

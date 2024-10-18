@@ -27,6 +27,42 @@ public class Coffee extends Item{
         coffees.add(this);
     }
 
+    // Method to create default coffees
+    public static void createCoffees() {
+        String[] milkTypes = {"Cows Milk", "Oat Milk", "Soy Milk"};
+        String[] beanTypes = {"Arabica", "Robusta", "Liberica", "Excelsa"};
+
+        Coffee cappuccino = new Coffee(
+                "Cappuccino",
+                "Cappuccino with regular milk",
+                4.95,
+                180,
+                true,
+                milkTypes[0], beanTypes[0]
+        );
+        Coffee latte = new Coffee(
+                "Latte",
+                "Latte with regular milk",
+                5.30,
+                170,
+                true,
+                milkTypes[0], beanTypes[1]
+        );
+        Coffee flatWhite = new Coffee(
+                "Flat White",
+                "Flat white with silky steamed milk",
+                3.95,
+                150,
+                false,
+                milkTypes[0],
+                beanTypes[2]
+        );
+
+        // Optionally, add them to the coffees list
+        coffees.add(cappuccino);
+        coffees.add(latte);
+    }
+
     /*
     Accessor methods for Coffee class
     - get milkType

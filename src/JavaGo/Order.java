@@ -14,16 +14,12 @@ public class Order {
 
     Fields
     - total is the sum of all items
-    - orderNumber is a randomly generated number
-    - serverName is the name of the server
     - paymentSuccess is a boolean that checks if the user can pay
+    - orderID is the randomly generated order ID number
      */
     public static double total;
-    private String orderNumber;
-    private String serverName;
     private boolean paymentSuccess;
     public static String orderID;
-    public Item item;
     static Scanner input = new Scanner(System.in);
 
     // main order method
@@ -33,11 +29,9 @@ public class Order {
         // menu
         Item.printItems();
         checkItem();
-
-
     }
 
-    // check item exists
+    // check item exists TODO add check for if item is invalid
     public static String checkItem() {
         // ask user what they want
         Scanner scanner = new Scanner(System.in);
@@ -55,6 +49,7 @@ public class Order {
                 // update total
                 double itemVal = item1.getPrice();
                 total += itemVal;
+                System.out.println("Total: " + total);
                 item = String.valueOf(item1);
                 backToMenu();
             }
@@ -65,7 +60,6 @@ public class Order {
     // back to menu method
     public static void backToMenu() {
         // go back to menu
-        Terminal.clearTerminal();
         Terminal.printHeader("Back to menu?");
         System.out.println("(1) Yes");
         System.out.println("(2) No");
@@ -104,11 +98,44 @@ public class Order {
         System.out.println("Who served you today?: ");
         String server = scanner.nextLine();
 
-        Terminal.printDivider(50);
-        Terminal.printHeader("card payment");
-
-        System.out.println("Please enter your pin");
-        int pin = input.nextInt();
-
+        payment();
     }
+
+    public static void payment() {
+        Terminal.clearTerminal();
+        Terminal.printHeader("Payment");
+
+        // Ask for the pin
+        System.out.println("Please enter your pin: ");
+        int enteredPin = input.nextInt();
+
+        // Find the account by pin
+        Payment user = Payment.findAccountByPin(enteredPin);
+
+        if (user != null) {
+            // Proceed with other checks (sort code, account number)
+            System.out.println("Please enter your Sort Code: ");
+            String enteredSortCode = input.next();
+
+            if (enteredSortCode.equals(user.getSortCode())) {
+                System.out.println("Please enter your Account Number: ");
+                String enteredAccountNumber = input.next();
+
+                if (enteredAccountNumber.equals(user.getAccountNumber())) {
+                    Terminal.printHeader("Success");
+                } else {
+                    System.out.println("Invalid Account Number.");
+                    payment();  // Retry
+                }
+            } else {
+                System.out.println("Invalid Sort Code.");
+                payment();  // Retry
+            }
+        } else {
+            System.out.println("Invalid pin.");
+            payment();  // Retry
+        }
+    }
+
+
 }
