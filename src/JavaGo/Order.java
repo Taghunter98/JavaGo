@@ -117,11 +117,11 @@ public class Order {
             System.out.println("Please enter your Sort Code: ");
             String enteredSortCode = input.next();
 
-            if (enteredSortCode.equals(user.getSortCode())) {
+            if (enteredSortCode.equals(user.sortCode())) {
                 System.out.println("Please enter your Account Number: ");
                 String enteredAccountNumber = input.next();
 
-                if (enteredAccountNumber.equals(user.getAccountNumber())) {
+                if (enteredAccountNumber.equals(user.accountNumber())) {
                     Terminal.printHeader("Success");
                 } else {
                     System.out.println("Invalid Account Number.");
