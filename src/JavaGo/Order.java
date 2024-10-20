@@ -1,5 +1,6 @@
 package JavaGo;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,7 +21,11 @@ public class Order {
     public static double total;
     private boolean paymentSuccess;
     public static String orderID;
+    public static String serverName;
     static Scanner input = new Scanner(System.in);
+
+    // list for shopping bag
+    static ArrayList<String> bag = new ArrayList<>();
 
     // main order method
     public static void order() {
@@ -31,31 +36,66 @@ public class Order {
         checkItem();
     }
 
-    // check item exists TODO add check for if item is invalid
-    public static String checkItem() {
+    // check if item exists with improved search and user selection for multiple items
+    public static void checkItem() {
         // ask user what they want
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please choose an item: ");
-        String item = scanner.nextLine();
+        String inputItem = scanner.nextLine().toLowerCase();
 
-        // check to see if item exists
+        ArrayList<Item> matchedItems = new ArrayList<>();
+
+        // search for items that contains the input text
         for (Item item1 : Item.items) {
-
-            // check input matches name
-            if (item.equals(item1.itemName)) {
-                String itemNa = item1.itemName;
-                System.out.println(itemNa + " added to bag");
-
-                // update total
-                double itemVal = item1.getPrice();
-                total += itemVal;
-                System.out.println("Total: " + total);
-                item = String.valueOf(item1);
-                backToMenu();
+            if (item1.itemName.toLowerCase().contains(inputItem)) {
+                matchedItems.add(item1);
             }
         }
-        return item;
+
+        // If matches are found, display them
+        if (!matchedItems.isEmpty()) {
+            System.out.println("Found " + matchedItems.size() + " item(s):");
+
+            // Print out all matching items
+            for (int i = 0; i < matchedItems.size(); i++) {
+                System.out.println("(" + (i + 1) + ") " + matchedItems.get(i).getItemName());
+            }
+
+            // If there is more than one match, ask the user to choose
+            if (matchedItems.size() > 1) {
+                System.out.println("Please choose an item number from the list: ");
+                int choice = scanner.nextInt();
+
+                // Ensure the user's choice is within range
+                if (choice > 0 && choice <= matchedItems.size()) {
+                    Item selectedItem = matchedItems.get(choice - 1);
+                    addToBag(selectedItem);
+                } else {
+                    System.out.println("Invalid choice. Returning to menu.");
+                    backToMenu();
+                }
+            } else {
+                // If only one match, automatically add it to the bag
+                Item selectedItem = matchedItems.get(0);
+                addToBag(selectedItem);
+            }
+
+        } else {
+            // If no matches found, suggest trying again
+            System.out.println("No items found with the name '" + inputItem + "'.");
+            backToMenu();
+        }
     }
+
+    // method to add to bag
+    public static void addToBag(Item item) {
+        bag.add(item.getItemName());
+        total += item.getPrice();
+        System.out.println(item.getItemName() + " added to bag. Total: £" + total);
+        backToMenu();
+    }
+
+
 
     // back to menu method
     public static void backToMenu() {
@@ -96,7 +136,7 @@ public class Order {
         Terminal.printHeader("Checkout");
 
         System.out.println("Who served you today?: ");
-        String server = scanner.nextLine();
+        serverName = scanner.nextLine();
 
         payment();
     }
@@ -122,20 +162,41 @@ public class Order {
                 String enteredAccountNumber = input.next();
 
                 if (enteredAccountNumber.equals(user.accountNumber())) {
-                    Terminal.printHeader("Success");
+                    printReceipt();
                 } else {
                     System.out.println("Invalid Account Number.");
-                    payment();  // Retry
+                    payment();
                 }
             } else {
                 System.out.println("Invalid Sort Code.");
-                payment();  // Retry
+                payment();
             }
         } else {
             System.out.println("Invalid pin.");
-            payment();  // Retry
+            payment();
         }
     }
 
+    // method to generate receipt
+    public static void printReceipt() {
+        Terminal.clearTerminal();
+        Terminal.printHeader("Javago");
+        System.out.println("Your server today was " + serverName);
+        System.out.println("Order Number: " + Order.orderNum());
+        System.out.println();
+        System.out.println();
 
+        // print out all items of bag
+        for(int i = 0; i < bag.size(); i++) {
+            System.out.println("Item: " + bag.get(i) + " " + (i + 1));
+            Terminal.printDivider(50);
+        }
+
+        // print total
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        Terminal.printDivider(50);
+        System.out.println("Total Price: " + total);
+    }
 }

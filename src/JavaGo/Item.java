@@ -48,10 +48,30 @@ public class Item {
 
     public static void createItems() {
         // Pastries and snacks
-        Item croissant = new Item("Croissant", "Fresh buttery croissant", 2.95, 200, false);
-        Item sandwich = new Item("Ham Sandwich", "Ham and cheese sandwich", 5.50, 350, true);
-        Item cookie = new Item("Chocolate Chip Cookie", "Large cookie with chocolate chips", 3.50, 250, true);
-        Item fruitSalad = new Item("Fruit Salad", "Mixed fruit salad", 4.20, 150, false);
+        Item croissant = new Item("Croissant",
+                "Fresh buttery croissant",
+                2.95,
+                200,
+                false
+        );
+        Item sandwich = new Item("Ham Sandwich",
+                "Ham and cheese sandwich",
+                5.50,
+                350,
+                true
+        );
+        Item cookie = new Item("Chocolate Chip Cookie",
+                "Large cookie with chocolate chips",
+                3.50,
+                250,
+                true
+        );
+        Item fruitSalad = new Item("Fruit Salad",
+                "Mixed fruit salad",
+                4.20,
+                150,
+                false
+        );
 
         // Add to items list
         items.add(croissant);
@@ -102,23 +122,6 @@ public class Item {
     // get array items
     public ArrayList<Item> getItems() {
         return items;
-    }
-
-    // Method to print item details
-    public static void printItem(String itemName) {
-        Iterator<Item> it = items.iterator();
-        if (it.hasNext()) {
-            Item item = it.next();
-            if (item.getItemName().contains(itemName)) {
-                System.out.println("Item Name: " + item.getItemName());
-                System.out.println("Description: " + item.getItemDes());
-                System.out.println("Calories: " + item.getItemCal());
-                System.out.println("Allergen Info: " + (item.hasAllergy() ? "Contains allergens" : "No allergens"));
-                System.out.println("Item ID: " + item.getItemID());
-            }
-        } else {
-            System.out.println("Item not found");
-        }
     }
 
     // Method to print each item out
